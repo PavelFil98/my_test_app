@@ -5,19 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://js.stripe.com/v3/"></script>
     <link rel="shortcut icon" href="#">
-    <title>Buy Item {{ item.id }}</title>
+    <title>Buy order number {{ order.id }}</title>
 </head>
 <body>
-    <h1>Item {{ item.id }}</h1>
-    <h1>Item name: {{ item.name }}</h1>
-    <p>{{ item.description }}</p>
-    <p>{{ item.price }} {{ item.currency }}</p>
+    <h1>Order №{{ order.id }}</h1>
+    <h2>List of items in order:</h2>
+    {% for item in order.items.all %}
+        <tr>
+        <p>{{ item.name }}</p>
+        <p>{{ item.description }}</p>
+        <p>{{ item.price}} {{ item.currency }}</p>
+        </tr>
+    {% endfor %}
+    {% if order.discount is not None %}
+        <tr>
+        <p>Discount name: {{ order.discount.name }}</p>
+        <p>Amount discount: {{ order.discount.amount }} % </p>
+        </tr>
+    {% endif %}
+    {% if order.tax is not None %}
+        <tr>
+        <p>Tax</p>
+        <p>{{ order.tax.name }}</p>
+        <p>{{ order.tax.percent }}%</p>
+        </tr>
+    {% endif %}
+    <p>Total order price: {{ order.price }} {{ order.currency }}</p>
     <button id="buy-button">Buy</button>
     <script type="text/javascript">
       var stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
       var buyButton = document.getElementById('buy-button');
       buyButton.addEventListener('click', function() {
-          fetch("{% url 'buy' item.id %}", {method: 'GET'})
+          fetch("{% url 'order-buy' order.id %}", {method: 'GET'})
               .then(function (response) {
                   return response.json();
               })
@@ -31,7 +50,5 @@
               });
       })
     </script>
-  </body>
+ </body>
 </html>
-
-
