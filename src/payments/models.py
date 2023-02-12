@@ -58,10 +58,6 @@ class Discount(models.Model):
     def __str__(self):
         return self.name
 
-    @property
-    def amount_in_cents(self):
-        return self.amount * 100
-
 
 class Tax(models.Model):
     name = models.CharField(
@@ -125,8 +121,8 @@ class Order(models.Model):
             total_price += item.price
         if self.discount is not None:
             discount = self.discount.amount
-            total_price = total_price * (100 - discount) / 100
+            total_price *= (100 - discount) / 100
         if self.tax is not None:
             tax = self.tax.percent
             total_price += total_price * tax / 100
-        return round(total_price)
+        return round(total_price, 2)
