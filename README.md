@@ -8,11 +8,13 @@ git clone https://github.com/PavelFil98/my_app.git
 ```
 2.
 ```bash
-cd infra
+touch .env
+nano .env 
 ```
+Заполнить .env согласно файлу env.example
 3.  
 ```bash
-docker-compose up -d --build   
+cd infra
 ```
 4.
 ```bash
