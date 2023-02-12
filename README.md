@@ -6,12 +6,11 @@
 ```bash
 git clone https://github.com/PavelFil98/my_test_app.git
 ```
-2.
+2. Заполнить .env согласно файлу env.example
 ```bash
 touch .env
 nano .env 
 ```
-Заполнить .env согласно файлу env.example
 3.  
 ```bash
 cd infra
