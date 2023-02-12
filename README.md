@@ -29,6 +29,6 @@ docker-compose exec web python manage.py collectstatic --no-input
 
 Эндпоинты:
 1. GET /buy/{id} - полученный от Stripe session.id выдаеться в результате запроса
-2. GET /item/{id} - простейая HTML страницу, с информацией о выбранном Item и кнопка Buy. По нажатию на кнопку Buy происходит запрос на /buy/{id}
+2. GET /item/{id} - HTML страница, с информацией о выбранном Item и кнопка Buy. По нажатию на кнопку Buy происходит запрос на /buy/{id}
 
 3.http://localhost/admin - админ панель (логин:admin, пароль:admin)
