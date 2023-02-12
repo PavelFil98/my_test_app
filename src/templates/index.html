@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="shortcut icon" href="#">
+    <title>Buy Item {{ item.id }}</title>
+</head>
+<body>
+    <h1>Item {{ item.id }}</h1>
+    <h1>Item name: {{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }}</p>
+    <button id="buy-button">Buy</button>
+    <script type="text/javascript">
+      var stripe = Stripe('{{ STRIPE_PUBLIC_KEY }}');
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+          fetch("{% url 'buy' item.id %}", {method: 'GET'})
+              .then(function (response) {
+                  return response.json();
+              })
+              .then(function (session) {
+                  return stripe.redirectToCheckout({sessionId: session.id});
+              })
+              .then(function (result) {
+                  if (result.error) {
+                      alert(result.error.message);
+                  }
+              });
+      })
+    </script>
+  </body>
+
+</html>
+
+
