@@ -3,7 +3,8 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 
-from djangostripe.settings import STRIPE_PUBLISHABLE_KEY, STRIPE_SECRET_KEY, YOUR_DOMAIN
+from djangostripe.settings import (STRIPE_PUBLISHABLE_KEY,
+                                   STRIPE_SECRET_KEY, YOUR_DOMAIN)
 from .models import Item
 
 stripe.api_key = STRIPE_SECRET_KEY
@@ -11,9 +12,14 @@ stripe.api_key = STRIPE_SECRET_KEY
 
 def main(request, item_id):
     item = Item.objects.get(pk=item_id)
-    return render(request, 'index.html', {'item': item,
-                                          'STRIPE_PUBLIC_KEY': STRIPE_PUBLISHABLE_KEY
-                                          })
+    return render(
+        request,
+        'index.html',
+        {
+            'item': item,
+            'STRIPE_PUBLIC_KEY': STRIPE_PUBLISHABLE_KEY
+        }
+    )
 
 
 def buy_item(request, item_id):
