@@ -32,7 +32,7 @@ def buy_item(request, item_id):
         }],
         mode='payment',
         success_url=YOUR_DOMAIN + '/success/',
-        cancel_url=YOUR_DOMAIN + '/cancel/',
+        cancel_url=YOUR_DOMAIN + '/cancelled/',
     )
     return JsonResponse({'id': session['id']})
 
