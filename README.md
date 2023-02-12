@@ -4,7 +4,7 @@
 ## Для для запуска:
 1.
 ```bash
-git clone https://github.com/PavelFil98/my_app.git
+git clone https://github.com/PavelFil98/my_test_app.git
 ```
 2.
 ```bash
