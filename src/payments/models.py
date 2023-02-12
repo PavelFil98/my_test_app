@@ -124,5 +124,5 @@ class Order(models.Model):
             total_price *= (100 - discount) / 100
         if self.tax is not None:
             tax = self.tax.percent
-            total_price += total_price * tax / 100
+            total_price *= (100+tax) / 100
         return round(total_price, 2)
